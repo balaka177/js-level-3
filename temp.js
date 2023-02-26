@@ -1,3 +1,25 @@
+const butter= async () => {
+    let a=await getColdDrinks;
+    console.log('Husband got butter');
+    
+    
+}
+
+
+const getColdDrinks=new Promise((resolve,reject) => {
+    console.log('Got cold drinks');
+    resolve('Got cold drings');
+})
+
+
+
+butter()
+
+
+
+
+
+
 const posts=[{title:'post1',data:'Post1 created'},{title:'post2',data:'post2 created'}];
 
 const p1=new Promise((resolve,reject) =>{
@@ -44,5 +66,10 @@ const p4=new Promise((resolve,reject) =>{
         resolve();
 });
 
+const check= async () => {
 
-Promise.all([p1,p2,p3,p4,p5])
+
+let x= await Promise.all([p1(),p2(),p3(),p4(),p5()])
+
+}
+
