@@ -16,13 +16,13 @@ function cred(e){
         email:em,
         phone:tel
      };
-     axios.post('https://crudcrud.com/api/f92ff4811b9b4ea395f50f22e8ab34a1/data',obj)
+     axios.get('https://crudcrud.com/api/f92ff4811b9b4ea395f50f22e8ab34a1/data')
      .then((res) => {
-      console.log(res)
-     })
-     .catch((err) => {
-      console.log(err)
-     })
+      console.log(res);
+      for(let i=0;i<res.data.length;i++){
+         var a=res.data[i].first_name;
+         var b=res.data[i].last_name;
+     
 
 
 
@@ -33,8 +33,8 @@ function cred(e){
      var btn=document.createElement('button');
      var li=document.createElement('li');
      btn.id=('buttonid');
-     li.appendChild(document.createTextNode(nm + ' - ' +em +' - '+ tel));
-
+     li.appendChild(document.createTextNode(`${a} ${b}`));
+ 
      
      btn.className='button';
      btn.appendChild(document.createTextNode('Delete'));
@@ -70,6 +70,13 @@ function cred(e){
 
          }
       })
+   }
+
+})
+.catch((err) => {
+ console.log(err)
+})
+
 
 }
 
