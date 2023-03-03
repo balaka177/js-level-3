@@ -1,7 +1,8 @@
 
 var sub=document.getElementById('for');
-sub.addEventListener('submit',cred);
+sub.addEventListener('click',cred);
 var list=document.getElementById('items');
+
 
 
 
@@ -13,15 +14,19 @@ function cred(e){
     var tel=document.getElementById('tell').value
      let obj={
         name:nm,
-        email:em,
+        gmail:em,
         phone:tel
      };
-     axios.get('https://crudcrud.com/api/f92ff4811b9b4ea395f50f22e8ab34a1/data')
+     axios.get('https://crudcrud.com/api/328569691e244b51a6a7beb7187c716f/data')
      .then((res) => {
       console.log(res);
-      for(let i=0;i<res.data.length;i++){
-         var a=res.data[i].first_name;
-         var b=res.data[i].last_name;
+      for(var i=0;i<res.data.length;i++){
+         console.log(i);
+         console.log(res.data[i].name);
+         console.log(res.data[i]._id);
+
+      
+      
      
 
 
@@ -30,13 +35,15 @@ function cred(e){
      //let obj_st=JSON.stringify(obj);
      //localStorage.setItem(em,obj_st);
      //document.write(nm + ' - ' +em +' - '+ tel);
-     var btn=document.createElement('button');
+
+     var ul=document.getElementById('items')
      var li=document.createElement('li');
-     btn.id=('buttonid');
-     li.appendChild(document.createTextNode(`${a} ${b}`));
- 
-     
-     btn.className='button';
+     li.appendChild(document.createTextNode(`${res.data[i].name} - ${res.data[i].gmail} - ${res.data[i].phone}`));
+     ul.appendChild(li);
+
+     var btn=document.createElement('button');
+     btn.id=('dele')
+     btn.className=(res.data[i]._id);
      btn.appendChild(document.createTextNode('Delete'));
 
      var ed=document.createElement('button');
@@ -45,16 +52,32 @@ function cred(e){
      li.appendChild(btn);
      li.appendChild(ed);
 
+ 
 
+   }
 
-     list.appendChild(li);
-     
-    btn.addEventListener('click',function(e){
-      if(e.target.id==='buttonid'){
+   })
+   .catch((err) => {
+    console.log(err)
+   })
+}
+
+   var bt =document.getElementsByTagName('button');
+    bt.addEventListener('click',function(e){
+      
+      console.log(btn.className)
+      axios.delete('https://crudcrud.com/api/328569691e244b51a6a7beb7187c716f/data/${btn.className}')
+      .then(res => console.log(res))
+      .catch(err =>console.log(err))
+         console.log("button is executed")
+      
+      
          var li=e.target.parentElement;
          list.removeChild(li);
-      }
+      
+      
     })
+    
     
       ed.addEventListener('click',function(e){
          if(e.target.id==='editbtn'){
@@ -66,19 +89,14 @@ function cred(e){
             localStorage.removeItem(em);
             var li=e.target.parentElement;
             list.removeChild(li);
+         
             
 
          }
       })
-   }
 
-})
-.catch((err) => {
- console.log(err)
-})
+   
 
 
-}
-
-
+ 
 
